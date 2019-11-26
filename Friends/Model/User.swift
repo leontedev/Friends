@@ -11,7 +11,7 @@ import Foundation
 struct User: Codable, Hashable {
     let id: UUID
     let name: String
-    let age: Int8
+    let age: Int16
     let address: String
     let about: String
     let friends: [Friend]

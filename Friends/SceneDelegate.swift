@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftUI
+import CoreData
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -19,8 +20,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         // Create the SwiftUI view that provides the window contents.
-        let contentView = ContentView()
+        let contentView = ContentView().environment(\.managedObjectContext, context)
+        
+        let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "SavedUsers")
+        let request = NSBatchDeleteRequest(fetchRequest: fetch)
+        _ = try? context.execute(request)
+        
+        let fetch2 = NSFetchRequest<NSFetchRequestResult>(entityName: "Friends")
+        let request2 = NSBatchDeleteRequest(fetchRequest: fetch)
+        _ = try? context.execute(request)
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
