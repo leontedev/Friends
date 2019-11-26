@@ -10,6 +10,7 @@
 - JSON Decoding / Codable
 - List/ForEach with Hashable data structure
 - NavigationView/Link
+- CoreData
 
 ### Day 60
 
